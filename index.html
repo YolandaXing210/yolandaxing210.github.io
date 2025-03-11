@@ -3,7 +3,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content='width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes'>
-    <meta name="apple-mobile-web-app-capable" content="yes">
     <title>Unity WebGL Player | aako ar unity</title>
     <link rel="stylesheet" href="TemplateData/style.css">
     <style>
@@ -37,30 +36,6 @@
 
 </head>
 <body>
-    <!-- Add camera permission request script -->
-    <script>
-       document.addEventListener('DOMContentLoaded', function() {
-           var startCameraBtn = document.getElementById('startCameraBtn');
-           if (navigator && navigator.mediaDevices && typeof navigator.mediaDevices.getUserMedia === 'function') {
-               startCameraBtn.style.display = 'block';
-               // Pre-check for camera permission
-               navigator.mediaDevices.getUserMedia({ video: true })
-                   .then(function(stream) {
-                       // Permission already granted
-                       stream.getTracks().forEach(track => track.stop());
-                       // Could auto-start camera here if desired
-                   })
-                   .catch(function(err) {
-                       console.log('Camera permission request failed or waiting for user input: ', err);
-                       // Keep button visible for user to click
-                   });
-           } else {
-               console.log('Camera API not available');
-               document.getElementById('startWebcamDiv').innerHTML = 
-                   '<p style="text-align: center; width:60vw">This browser does not support camera access required for this AR experience</p>';
-           }
-       });
-    </script>
     <script src="app.js" type="text/javascript"></script>
     <!--IMAGETARGETS-->
     <div id="startWebcamDiv" class="ctaDiv">
@@ -98,9 +73,9 @@
                 document.getElementById("startWebcamDiv").style.display = "none";
 
                 createUnityInstance(document.querySelector("#unity-canvas"), {
-                    dataUrl: "Build/github build.data.gz",
-                    frameworkUrl: "Build/github build.framework.js.gz",
-                    codeUrl: "Build/github build.wasm.gz",
+                    dataUrl: "Build/github build.data",
+                    frameworkUrl: "Build/github build.framework.js",
+                    codeUrl: "Build/github build.wasm",
                     streamingAssetsUrl: "StreamingAssets",
                     companyName: "DefaultCompany",
                     productName: "aako ar unity",
